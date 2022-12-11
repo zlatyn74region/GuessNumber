@@ -33,6 +33,8 @@ def input_int(
             print('Ошибка: нужно ввести число!')
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO, filename="logfile.log", filemode="a",
+                            format="%(asctime)s %(levelname)s %(message)s")
 
     #Берет на ввод у пользователя 2 числа: число для угадывания и кол-во попыток
     right = random.randint(1, input_int("Введите максимальное число для загадывания: ", 1))
@@ -46,6 +48,7 @@ if __name__ == '__main__':
         #Проверка на угаданное число
         if guess == right: 
             print("Вы угадали! Это число", right)
+            logging.info("Вы угадали! Это число" + str(right))
             break
         
         #Вычет попыток
@@ -53,10 +56,13 @@ if __name__ == '__main__':
         
         if not tries: 
             print("Попытки закончились, вы не угадали число, правильный ответ:", right) 
+            logging.info("Попытки закончились, вы не угадали число, правильный ответ:" + str(right))
             break
         
         #Подсказка
         if guess > right: 
             print("Попробуйте число меньше") 
+            logging.info("Попробуйте число меньше")
         else: 
             print("Попробуйте число больше")
+            logging.info("Попробуйте число больше")
